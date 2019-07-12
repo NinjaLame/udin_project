@@ -3,7 +3,7 @@
     import ExamForm from "../components/ExamForm.svelte";
     import { navigate, Router, Route, link } from "svelte-routing";
     import { onMount } from 'svelte';
-    import { getExams } from "../data.js"
+    import { getExams, deleteExam } from "../data.js"
     
     let exams = []
     onMount(() => {
@@ -13,6 +13,11 @@
     })
     const createNew = () => {
         navigate("exam_period/create_exam", {replace: true});
+    }
+    const deleteEl = (id) => {
+        deleteExam(id).then(res=>res.json()).then(data=>{
+            exams = exams.filter(exam=>exam.id!=id);
+        })
     }
 </script>
 
@@ -51,6 +56,7 @@
                                         <th>Nama</th>
                                         <th>Pendaftaran</th>
                                         <th>Penutupan</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -64,6 +70,7 @@
                                                 <th>{item.display_name}</th>
                                                 <th>{item.apply_start}</th>
                                                 <th>{item.apply_end}</th>
+                                                <th><button class="mb-2 mr-2 btn-transition btn btn-outline-danger" on:click={()=>deleteEl(item.id)}>Delete</button></th>
                                         </tr>
                                     {/each}
                                     </tbody>
@@ -74,10 +81,10 @@
                 </div>
             </Route>
             <Route path="create_exam">
-                <ExamForm/>
+                <ExamForm isEdit={false}/>
             </Route>
             <Route path="edit_exam/*">
-                <ExamForm isEdit=false/>
+                <ExamForm isEdit={true}/>
             </Route>
         </Router>
     </div>

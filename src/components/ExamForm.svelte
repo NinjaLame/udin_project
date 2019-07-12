@@ -15,17 +15,15 @@
         "exam_type": "",
         "count_examinee": 0,
     }
-    export let isEdit = false;
-    let start_date;
-    let end_date;
-
-    
+    export let isEdit;
     
     onMount(()=>{
-        if (isEdit = true){
+        if (isEdit == true){
             let id = window.location.href.split('/').slice(-1)[0];
             getExamsId(id).then(response=>response.json())
-                .then(data=>{exam_info = data.data.exam[0]; console.log(exam_info.status)});
+                .then(data=>{
+                    exam_info = data.data.exam[0]; 
+                });
         };
         getProjectPeriod().then(response=>response.json()).then(data=>{
             project_period = data.data.project
@@ -33,12 +31,27 @@
     })
 
     const back = () => {
-        navigate("../exam_period", {replace:true})
+        if (isEdit == true){
+            navigate("../../exam_period", {replace:true});
+        }
+        else {
+            navigate("../exam_period", {replace:true});
+        }
+    }
+    const create = () => {
+        
+    }
+    const edit = () => {
+
     }
 </script>
 <div class="row">
      <div class="col-md-12">
-        <button class="mb-2 mr-2 btn-transition btn btn-outline-primary">Create</button>
+        {#if isEdit == true}
+            <button class="mb-2 mr-2 btn-transition btn btn-outline-primary" on:click={edit}>Edit</button>
+        {:else}
+            <button class="mb-2 mr-2 btn-transition btn btn-outline-primary" on:click={create}>Create </button>
+        {/if}
         <button class="mb-2 mr-2 btn-transition btn btn-outline-warning" on:click="{back}">Cancel</button>
     </div>
 </div>
@@ -84,11 +97,11 @@
             <div class="card-body">
                     <div class="position-relative form-group">
                         <label for="applyStart" class="">Awal Tgl Daftar</label>
-                        <input name="apply_start" id="applyStart" placeholder="" type="date" class="form-control">
+                        <input name="apply_start" id="applyStart" bind:value={exam_info.apply_start} placeholder="" type="date" class="form-control">
                     </div>
                     <div class="position-relative form-group">
                         <label for="applyEnd" class="">Akhir Tgl Daftar</label>
-                        <input name="apply_end" id="applyEnd" placeholder="" type="date" class="form-control">
+                        <input name="apply_end" id="applyEnd" bind:value={exam_info.apply_end}  placeholder="" type="date" class="form-control">
                     </div>
                     <div class="position-relative form-group">
                         <label for="count_examinee" class="">Jml mhs daftar</label>

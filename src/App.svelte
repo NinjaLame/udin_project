@@ -5,16 +5,16 @@
 
     import { auth, url, access_token } from './store';
     
-    console.log($access_token)
+    console.log($auth)
 
 	if($auth == false && window.location.pathname != $url+"/login") {
         window.location = $url+"/login"
     } 
-    else if($auth == "true") {
-        auth.check_auth()
-    }
     else if( $auth == "true" && window.location.pathname == $url+"/login" ){
-        window.location = $url+"/"
+        window.location = $url+"/home"
+    }
+    else if($auth == "true") {
+        auth.check_auth();
     }
 
 </script>

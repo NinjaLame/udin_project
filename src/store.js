@@ -30,11 +30,14 @@ const createAuth =  () => {
                 .then(response=>response.json())
                 .then(
                     (data) => {
-                        // window.location = "/udin_project/client";
-                        access_token.set(data.access_token)
-                        window.localStorage.setItem("access-token",data.access_token );
-                        window.localStorage.setItem("isAuthenticated", true)
-                        set(true);
+                        if (data.access_token) {
+                            access_token.set(data.access_token)
+                            window.localStorage.setItem("access-token",data.access_token );
+                            window.localStorage.setItem("isAuthenticated", true)
+                            window.location = "/udin_project/client/home";
+
+                            set(true);
+                        }
                     })
                 .catch((e)=>console.error(e))
         },
@@ -60,10 +63,11 @@ const createAuth =  () => {
                 },
             }).then(response=>response.json())
             .then((data)=>{
-                if (data.status) {
+                if (data.data.status) {
                     set(true);
                 } else {
                     set(false);
+                    window.location = "./login"
                 }
             })
             .catch(()=>{

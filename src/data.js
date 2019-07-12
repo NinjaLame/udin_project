@@ -27,6 +27,14 @@ export const getExamsId = (id) => {
         }
     })
 };
+export const deleteExam = id => {
+    return fetch(base_url+"/restful/udin_project/exam/"+id,{
+        method: "DELETE",
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+}
 export const getBatch = () => {
     return fetch(base_url+"/restful/udin_project/batch",{
         headers: {
