@@ -50,6 +50,22 @@ export const createExam = (data) => {
         body: formData
     })
 }
+
+export const editExam = (data,id) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/exam/"+id,{
+        method: "PUT",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
 export const getBatch = () => {
     return fetch(base_url+"/restful/udin_project/batch",{
         headers: {
