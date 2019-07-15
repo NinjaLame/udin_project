@@ -5,17 +5,15 @@
 
     import { auth, url, access_token } from './store';
     
-    console.log($auth)
-
-	if($auth == false && window.location.pathname != $url+"/login") {
-        window.location = $url+"/login"
-    } 
-    else if( $auth == "true" && window.location.pathname == $url+"/login" ){
-        window.location = $url+"/home"
-    }
-    else if($auth == "true") {
-        auth.check_auth();
-    }
+	// if($auth != "true" && window.location.pathname != $url+"/login") {
+    //     window.location = $url+"/login"
+    // } 
+    // else if( $auth == "true" && window.location.pathname == $url+"/login" ){
+    //     window.location = $url+"/home"
+    // }
+    // else if($auth == "true") {
+    //     auth.check_auth();
+    // }
 
 </script>
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">

@@ -19,10 +19,7 @@ const createAuth =  () => {
             return fetch(url+"/api/auth/token",{
                 method: "POST",
                 headers: {
-                    // 'Content-Type': 'application/json',
-                    // 'Content-Type': 'multipart/form-data',
                     'charset':'utf-8',
-                    // 'Content-Type': 'application/json',
                     'Accept': 'application/x-www-form-urlencoded'
                 },
                 body: data
@@ -34,8 +31,7 @@ const createAuth =  () => {
                             access_token.set(data.access_token)
                             window.localStorage.setItem("access-token",data.access_token );
                             window.localStorage.setItem("isAuthenticated", true)
-                            window.location = "/udin_project/client/home";
-
+                            // window.location = "/udin_project/client/home";
                             set(true);
                         }
                     })

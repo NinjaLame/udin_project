@@ -36,9 +36,6 @@
                     </div>
                 </div>
                 <div class="page-title-actions">
-                    <button on:click="{createNew}" type="button" data-toggle="tooltip" title="Buat Periode Ujian" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
-                        <i class="fa fa-star"></i> Buat Ujian Baru
-                    </button>
                 </div>    
             </div>
         </div>            
@@ -48,7 +45,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="main-card mb-3 card">
-                            <div class="card-body"><h5 class="card-title">Table striped</h5>
+                            <div class="card-body">
+                                <button on:click="{createNew}" type="button"  title="Buat Periode Ujian" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                                    <i class="fa fa-star"></i> Buat Ujian Baru
+                                </button>
+                            <!-- <h5 class="card-title">Table striped</h5> -->
                                 <table class="mb-0 table table-striped">
                                     <thead>
                                     <tr>

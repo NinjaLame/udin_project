@@ -1,4 +1,4 @@
-const base_url = "http://localhost:8069"
+const base_url = "http://localhost:8069";
 export const getProjectPeriod = () => {
     return fetch(base_url+"/restful/udin_project/project_period",{
         headers: {
@@ -33,6 +33,21 @@ export const deleteExam = id => {
         headers: {
             "access-token": window.localStorage.getItem("access-token")
         }
+    })
+}
+export const createExam = (data) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/exam/",{
+        method: "POST",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
     })
 }
 export const getBatch = () => {

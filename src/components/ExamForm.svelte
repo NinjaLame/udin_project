@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { navigate } from "svelte-routing";
-    import { getProjectPeriod, getExamsId } from "../data.js";
+    import { getProjectPeriod, getExamsId, createExam } from "../data.js";
     let project_period = []
     let exam_info = {
         "count_exam_slot": 0,
@@ -39,7 +39,7 @@
         }
     }
     const create = () => {
-        
+        createExam(exam_info)
     }
     const edit = () => {
 
