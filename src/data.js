@@ -6,6 +6,54 @@ export const getProjectPeriod = () => {
         }
     })
 };
+
+export const getProjectPeriodId = (id) => {
+    return fetch(base_url+"/restful/udin_project/project_period/"+id,{
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+
+export const deletePeriod = (id) => {
+    return fetch(base_url+"/restful/udin_project/project_period/"+id,{
+        method: "DELETE",
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+export const createPeriodProject = (data) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/project_period/",{
+        method: "POST",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+export const editPeriodProject = (data,id) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/project_period/"+id,{
+        method: "PUT",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+
 export const getProjects = () => {
     return fetch(base_url+"/restful/udin_project/projects",{
         headers: {

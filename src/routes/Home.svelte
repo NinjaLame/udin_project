@@ -3,7 +3,7 @@
     import ProjectPeriodForm from "../components/ProjectPeriodForm.svelte";
     import { onMount } from 'svelte';
     import { navigate, Router, Route } from "svelte-routing";
-    import { getProjectPeriod } from "../data.js"
+    import { getProjectPeriod, deletePeriod } from "../data.js"
     let project_period = []
     onMount(() => {
         getProjectPeriod().then(response=>response.json()).then(data=>{
@@ -12,6 +12,14 @@
     })
     const createNew = () => {
         navigate('home/create_project_period', {replace:true});
+    }
+    const deleteEl = (id) => {
+        deletePeriod(id).then(res=>res.json()).then(data=>{
+            project_period = project_period.filter(period=>period.id!=id);
+        })
+    }
+    const editEl = (id) => {
+        navigate("home/edit_project_period/"+id, {replace:true});
     }
 </script>
 
@@ -30,9 +38,7 @@
                     </div>
                 </div>
                 <div class="page-title-actions">
-                    <button on:click="{createNew}" type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
-                        <i class="fa fa-star"></i> Buat Periode Baru
-                    </button>
+                    
                 </div>    
             </div>
         </div>            
@@ -41,7 +47,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="main-card mb-3 card">
-                            <div class="card-body"><h5 class="card-title">Table striped</h5>
+                            <div class="card-body">
+                            <button on:click="{createNew}" type="button" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                                <i class="fa fa-star"></i> Buat Periode Baru
+                            </button>
                                 <table class="mb-0 table table-striped">
                                     <thead>
                                     <tr>
@@ -49,15 +58,26 @@
                                         <th>Nama</th>
                                         <th>Mulai input Dosbing</th>
                                         <th>Batas input Dosbing</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {#each project_period as period}
                                         <tr>
-                                            <th>{period.batch_id[1]}</th>
-                                            <th>{period.display_name}</th>
-                                            <th>{period.supervisor_apply_start}</th>
-                                            <th>{period.supervisor_apply_end}</th>
+                                            <td>{period.batch_id[1]}</td>
+                                            <td>{period.display_name}</td>
+                                            <td>{period.supervisor_apply_start}</td>
+                                            <td>{period.supervisor_apply_end}</td>
+                                            <td>
+                                                <button 
+                                                    class="mb-2 mr-2 btn-transition btn btn-outline-danger" 
+                                                    on:click={()=>deleteEl(period.id)}>
+                                                    Delete </button>
+                                                <button 
+                                                    class="mb-2 mr-2 btn-transition btn btn-outline-info" 
+                                                    on:click={()=>editEl(period.id)}>
+                                                    Edit </button> 
+                                            </td>
                                         </tr>
                                     {/each}
                                     </tbody>
@@ -68,7 +88,10 @@
                 </div>
             </Route>
             <Route path="create_project_period">
-                <ProjectPeriodForm></ProjectPeriodForm>
+                <ProjectPeriodForm isEdit={false}/>
+            </Route>
+            <Route path="edit_project_period/*">
+                <ProjectPeriodForm isEdit={true}/>
             </Route>
         </Router>
     </div>

@@ -5,6 +5,7 @@
     let project_period = [];
     let students = [];
     let lecturers = [];
+    export let isEdit;
     onMount(()=>{
         getProjectPeriod().then(response=>response.json()).then(data=>{
             project_period = data.data.project;
@@ -18,12 +19,26 @@
     })
 
     const back = () => {
-        navigate("../home", {replace:true})
+        if (isEdit == true){
+            navigate("../../exam_period", {replace:true});
+        }
+        else {
+            navigate("../exam_period", {replace:true});
+        }
+    }
+    const create = () => {
+    }
+    const edit = () => {
+        let id = window.location.href.split('/').slice(-1)[0];
     }
 </script>
 <div class="row">
      <div class="col-md-12">
-        <button class="mb-2 mr-2 btn-transition btn btn-outline-primary">Create</button>
+        {#if isEdit == true}
+            <button class="mb-2 mr-2 btn-transition btn btn-outline-primary" on:click={edit}>Edit</button>
+        {:else}
+            <button class="mb-2 mr-2 btn-transition btn btn-outline-primary" on:click={create}>Create </button>
+        {/if}
         <button class="mb-2 mr-2 btn-transition btn btn-outline-warning" on:click="{back}">Cancel</button>
     </div>
 </div>
