@@ -19,6 +19,9 @@
             exams = exams.filter(exam=>exam.id!=id);
         })
     }
+    const editEl = (id) => {
+        navigate("exam_period/edit_exam/"+id, {replace:true});
+    }
 </script>
 
 <MainPage>
@@ -64,14 +67,21 @@
                                     {#each exams as item}
                                         <tr>
                                                 <th>
-                                                <a href="exam_period/edit_exam/{item.id}" use:link>
+                                                <!-- <a href="exam_period/edit_exam/{item.id}" use:link> -->
                                                     {item.exam_period}
-                                                </a>
+                                                <!-- </a> -->
                                                 </th>
                                                 <th>{item.display_name}</th>
                                                 <th>{item.apply_start}</th>
                                                 <th>{item.apply_end}</th>
-                                                <th><button class="mb-2 mr-2 btn-transition btn btn-outline-danger" on:click={()=>deleteEl(item.id)}>Delete</button></th>
+                                                <th>
+                                                    <button class="mb-2 mr-2 btn-transition btn btn-outline-danger" 
+                                                    on:click={()=>deleteEl(item.id)}>Delete</button>
+                                                    <button 
+                                                    class="mb-2 mr-2 btn-transition btn btn-outline-info" 
+                                                    on:click={()=>editEl(item.id)}>
+                                                    Edit </button> 
+                                                </th>
                                         </tr>
                                     {/each}
                                     </tbody>

@@ -77,6 +77,7 @@
                     <div class="position-relative form-group">
                         <label for="examType" class="">Jenis Ujian</label>
                         <select name="exam_type" bind:value={exam_info.exam_type} id="examType" class="form-control">
+                            <option selected value="-1" disabled>--select jenis Ujian--</option>
                             <option value="1">Proposal</option>
                             <option value="2">Ujian Akhir</option>
                         </select>
@@ -84,6 +85,7 @@
                     <div class="position-relative form-group">
                         <label for="examStatus" class="">Status</label>
                         <select name="status" id="examStatus" bind:value={exam_info.status} class="form-control">
+                            <option selected value="-1" disabled>--select status Ujian--</option>
                             <option value="1">Rencana</option>
                             <option value="2">Pendaftaran</option>
                             <option value="3">Berjalan</option>

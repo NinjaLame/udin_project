@@ -6,7 +6,6 @@ export const getProjectPeriod = () => {
         }
     })
 };
-
 export const getProjectPeriodId = (id) => {
     return fetch(base_url+"/restful/udin_project/project_period/"+id,{
         headers: {
@@ -14,7 +13,6 @@ export const getProjectPeriodId = (id) => {
         }
     })
 };
-
 export const deletePeriod = (id) => {
     return fetch(base_url+"/restful/udin_project/project_period/"+id,{
         method: "DELETE",
@@ -54,13 +52,6 @@ export const editPeriodProject = (data,id) => {
     })
 }
 
-export const getProjects = () => {
-    return fetch(base_url+"/restful/udin_project/projects",{
-        headers: {
-            "access-token": window.localStorage.getItem("access-token")
-        }
-    })
-};
 export const getExams = () => {
     return fetch(base_url+"/restful/udin_project/exams",{
         headers: {
@@ -98,7 +89,6 @@ export const createExam = (data) => {
         body: formData
     })
 }
-
 export const editExam = (data,id) => {
     let formData = new FormData();
     for ( let key in data ) {
@@ -114,6 +104,60 @@ export const editExam = (data,id) => {
         body: formData
     })
 }
+
+export const getProjects = () => {
+    return fetch(base_url+"/restful/udin_project/projects",{
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+export const getProjectId = (id) => {
+    return fetch(base_url+"/restful/udin_project/project/"+id,{
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+export const deleteProject = id => {
+    return fetch(base_url+"/restful/udin_project/project/"+id,{
+        method: "DELETE",
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+}
+export const createProject = (data) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/project/",{
+        method: "POST",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+export const editProject = (data,id) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/project/"+id,{
+        method: "PUT",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+
 export const getBatch = () => {
     return fetch(base_url+"/restful/udin_project/batch",{
         headers: {
