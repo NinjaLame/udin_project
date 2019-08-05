@@ -11,7 +11,6 @@ const createAuth =  () => {
     return {
         subscribe,
         login: (user, password) => {
-            console.log(user,password)
             let data = new FormData();
             data.append("login", user);
             data.append("password", password);
@@ -31,7 +30,6 @@ const createAuth =  () => {
                             access_token.set(data.access_token)
                             window.localStorage.setItem("access-token",data.access_token );
                             window.localStorage.setItem("isAuthenticated", true)
-                            // window.location = "/udin_project/client/home";
                             set(true);
                         }
                     })

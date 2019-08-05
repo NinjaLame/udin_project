@@ -1,7 +1,8 @@
 <script>
-    import { onMount } from "svelte";
+    import { onMount, setContext } from "svelte";
     import { navigate } from "svelte-routing";
     import { getProjectPeriod, getExamsId, createExam, editExam } from "../data.js";
+    import ExamineeTable from './ExamineeTable.svelte';
     let project_period = []
     let exam_info = {
         "count_exam_slot": 0,
@@ -15,6 +16,7 @@
         "exam_type": "",
         "count_examinee": 0,
     }
+    $: exam_id = exam_info.id
     export let isEdit;
     
     onMount(()=>{
@@ -23,6 +25,7 @@
             getExamsId(id).then(response=>response.json())
                 .then(data=>{
                     exam_info = data.data.exam[0]; 
+                    
                 });
         };
         getProjectPeriod().then(response=>response.json()).then(data=>{
@@ -118,3 +121,7 @@
         </div>
     </div>
 </div>
+
+{#if isEdit == true} 
+<ExamineeTable id={window.location.href.split('/').slice(-1)[0]} />
+{/if}

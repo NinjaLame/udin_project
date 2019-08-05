@@ -158,6 +158,59 @@ export const editProject = (data,id) => {
     })
 }
 
+export const getExaminees = (id) => {
+    return fetch(base_url+"/restful/udin_project/exam/"+id+"/examinee",{
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+export const getExamineeId = (id) => {
+    return fetch(base_url+"/restful/udin_project/examinee/"+id,{
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+};
+export const deleteExaminee = id => {
+    return fetch(base_url+"/restful/udin_project/examinee/"+id,{
+        method: "DELETE",
+        headers: {
+            "access-token": window.localStorage.getItem("access-token")
+        }
+    })
+}
+export const createExaminee = (data) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/examinee/",{
+        method: "POST",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+export const editExaminee = (data,id) => {
+    let formData = new FormData();
+    for ( let key in data ) {
+        formData.append(key, data[key]);
+    }
+    return fetch(base_url+"/restful/udin_project/examinee/"+id,{
+        method: "PUT",
+        headers: {
+            'charset':'utf-8',
+            'Accept': 'application/x-www-form-urlencoded',
+            "access-token": window.localStorage.getItem("access-token")
+        },
+        body: formData
+    })
+}
+
 export const getBatch = () => {
     return fetch(base_url+"/restful/udin_project/batch",{
         headers: {
